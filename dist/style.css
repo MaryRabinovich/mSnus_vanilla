@@ -1,0 +1,83 @@
+/*!****************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/layout/style.scss ***!
+  \****************************************************************************************************************/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 2rem;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+menu {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 1rem 2rem 1rem 1rem;
+  position: absolute;
+  top: 5rem;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.menu-hidden {
+  display: none;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+button {
+  font-size: 2rem;
+  background: none;
+  border: none;
+}
+button:hover {
+  cursor: pointer;
+}
+button:hover svg {
+  stroke: #111;
+}
+
+input {
+  font-size: 2rem;
+}
+
+svg {
+  pointer-events: none;
+}
+
+.m-05 {
+  margin: 0.5rem;
+}
+
+.mb-3 {
+  margin-bottom: 3rem;
+}
+
+.burger {
+  height: 1.5rem;
+  width: 1.5rem;
+  stroke: #999;
+  stroke-width: 1rem;
+}
+/*!*****************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/figures/style.scss ***!
+  \*****************************************************************************************************************/
+.figure {
+  width: 100px;
+  height: 100px;
+  margin: 0.5rem;
+}
