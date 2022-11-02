@@ -8,22 +8,27 @@
 </head>
 <body>
     <header>
-        <button id="burger" class="m-05"></button>
-        <button class="m-05">circle</button>
-        <button class="m-05">square</button>
+        <button id="burger" class="m-05 burger"></button>
+        <button id="circle" class="m-05 checkbox">круги</button>
+        <button id="square" class="m-05 checkbox">квадраты</button>
     </header>
-    <menu class="menu-hidden">
-        <button class="m-05">red</button>
-        <button class="m-05">green</button>
-        <button class="m-05">blue</button>
-        <button class="m-05 mb-3">yellow</button>
+    <!-- <menu class="menu-hidden"> -->
+    <menu>
+        <button id="red" class="m-05 checkbox checkbox-red">красные</button>
+        <button id="green" class="m-05 checkbox checkbox-green">зелёные</button>
+        <button id="blue" class="m-05 checkbox checkbox-blue">синие</button>
+        <button id="yellow" class="m-05 mb-3 checkbox checkbox-yellow">жёлтые</button>
 
-        <button class="m-05">all</button>
-        <button class="m-05">dark</button>
-        <button class="m-05 mb-3">light</button>
+        <button id="all" class="m-05 darkness">все</button>
+        <button id="dark" class="m-05 darkness">тёмные</button>
+        <button id="light" class="m-05 mb-3 darkness">светлые</button>
 
         <div class="m-05">
-            colNum
+            колонок: 
+            <input type="number" 
+                id="num-cols" class="num-cols" 
+                value="4" min="1" max="8"
+            />
         </div>
     </menu>
     <main>

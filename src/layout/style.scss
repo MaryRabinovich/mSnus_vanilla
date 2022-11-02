@@ -1,9 +1,5 @@
 @import '../colors';
 
-// body {
-//     background: $color-dark-red;
-// }
-
 * {
     margin: 0;
     padding: 0;
@@ -18,6 +14,7 @@ body {
 header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 1rem;
 }
 
@@ -30,6 +27,7 @@ menu {
     bottom: 0;
     left: 0;
     z-index: 1;
+    background: $color-light;
 }
 
 .menu-hidden {
@@ -42,28 +40,6 @@ main {
     justify-content: center;
 }
 
-button {
-    font-size: 2rem;
-    background: none;
-    border: none;
-    
-    &:hover {
-        cursor: pointer;
-
-        svg {
-            stroke: $color-black;
-        }
-    }
-}
-
-input {
-    font-size: 2rem;
-}
-
-svg {
-    pointer-events: none;
-}
-
 .m-05 {
     margin: .5rem;
 }
@@ -73,8 +49,21 @@ svg {
 }
 
 .burger {
-    height: 1.5rem;
-    width: 1.5rem;
-    stroke: $color-neutral;
-    stroke-width: 1rem;
+    background: transparent;
+    border: none;
+
+    svg {
+        height: 1.5rem;
+        width: 1.5rem;
+        stroke: $color-neutral;
+        stroke-width: 1rem;
+    }
+
+    &:hover {
+        cursor: pointer;
+
+        svg {
+            stroke: $color-black;
+        }
+    }
 }

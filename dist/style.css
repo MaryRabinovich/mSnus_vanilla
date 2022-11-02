@@ -15,6 +15,7 @@ body {
 header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 1rem;
 }
 
@@ -27,6 +28,7 @@ menu {
   bottom: 0;
   left: 0;
   z-index: 1;
+  background: #ddd;
 }
 
 .menu-hidden {
@@ -39,26 +41,6 @@ main {
   justify-content: center;
 }
 
-button {
-  font-size: 2rem;
-  background: none;
-  border: none;
-}
-button:hover {
-  cursor: pointer;
-}
-button:hover svg {
-  stroke: #111;
-}
-
-input {
-  font-size: 2rem;
-}
-
-svg {
-  pointer-events: none;
-}
-
 .m-05 {
   margin: 0.5rem;
 }
@@ -68,10 +50,79 @@ svg {
 }
 
 .burger {
+  background: transparent;
+  border: none;
+}
+.burger svg {
   height: 1.5rem;
   width: 1.5rem;
   stroke: #999;
   stroke-width: 1rem;
+}
+.burger:hover {
+  cursor: pointer;
+}
+.burger:hover svg {
+  stroke: #111;
+}
+/*!*********************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/controllers/style.scss ***!
+  \*********************************************************************************************************************/
+.checkbox,
+.radio {
+  font-size: 2rem;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+}
+.checkbox svg,
+.radio svg {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.5rem;
+  pointer-events: none;
+}
+.checkbox svg :first-child,
+.radio svg :first-child {
+  fill: none;
+  stroke: #999;
+  stroke-width: 0.5rem;
+}
+.checkbox:hover,
+.radio:hover {
+  cursor: pointer;
+}
+.checkbox:hover svg :first-child,
+.radio:hover svg :first-child {
+  stroke: #111;
+}
+.checkbox-empty svg :last-child,
+.radio-empty svg :last-child {
+  fill: none;
+}
+
+.checkbox-red svg :first-child {
+  fill: #aa4444;
+}
+
+.checkbox-green svg :first-child {
+  fill: #44aa44;
+}
+
+.checkbox-blue svg :first-child {
+  fill: #4444aa;
+}
+
+.checkbox-yellow svg :first-child {
+  fill: #dddd55;
+}
+
+.num-cols {
+  font-size: 2rem;
+  width: 4rem;
+  padding: 0 0.5rem;
+  border: none;
 }
 /*!*****************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/figures/style.scss ***!
