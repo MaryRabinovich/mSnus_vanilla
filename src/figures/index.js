@@ -3,7 +3,7 @@ require('./style.scss')
 import factory from './factory'
 import validator from './validator'
 
-fetch('/data/test.json')
+fetch('data/test.json')
     .then(result => result.json())
     .then(result => render(result))
 
