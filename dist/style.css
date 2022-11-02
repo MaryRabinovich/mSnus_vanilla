@@ -10,6 +10,7 @@
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 2rem;
+  overflow-y: scroll;
 }
 
 header {
@@ -36,9 +37,7 @@ menu {
 }
 
 main {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  min-height: 90vh;
 }
 
 .m-05 {
@@ -103,19 +102,19 @@ main {
 }
 
 .checkbox-red svg :first-child {
-  fill: #aa4444;
+  fill: #ff6666;
 }
 
 .checkbox-green svg :first-child {
-  fill: #44aa44;
+  fill: #66ff66;
 }
 
 .checkbox-blue svg :first-child {
-  fill: #4444aa;
+  fill: #6666ff;
 }
 
 .checkbox-yellow svg :first-child {
-  fill: #dddd55;
+  fill: #ffff66;
 }
 
 .num-cols {
@@ -127,8 +126,40 @@ main {
 /*!*****************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/figures/style.scss ***!
   \*****************************************************************************************************************/
-.figure {
-  width: 100px;
-  height: 100px;
-  margin: 0.5rem;
+.figures {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding-left: 50px;
+}
+
+.figure-circle {
+  border-radius: 50%;
+}
+.figure-dark-red {
+  background: #aa0000;
+}
+.figure-dark-green {
+  background: #00aa00;
+}
+.figure-dark-blue {
+  background: #0000aa;
+}
+.figure-dark-yellow {
+  background: #aaaa00;
+}
+.figure-light-red {
+  background: #ff6666;
+}
+.figure-light-green {
+  background: #66ff66;
+}
+.figure-light-blue {
+  background: #6666ff;
+}
+.figure-light-yellow {
+  background: #ffff66;
+}
+.figure-hidden {
+  display: none;
 }

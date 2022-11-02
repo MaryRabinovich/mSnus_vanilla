@@ -9,6 +9,7 @@
 body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 2rem;
+    overflow-y: scroll;
 }
 
 header {
@@ -35,9 +36,7 @@ menu {
 }
 
 main {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    min-height: 90vh;
 }
 
 .m-05 {

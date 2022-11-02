@@ -1,18 +1,16 @@
-const state = {}
+import notifier from './notifier'
 
-function notify() {
-    console.log(state)
-}
+const state = {}
 
 function set(key, value) {
     state[key] = value
-    notify()
+    notifier.notify()
 }
 
 function toggle(key) {
     if (!typeof (state[key]) === 'boolean') return
     state[key] = !state[key]
-    notify()
+    notifier.notify()
 }
 
 function get(key) {
@@ -24,6 +22,8 @@ function all() {
 }
 
 export default {
+    notifier,
+    
     set,
     toggle,
     get,

@@ -1,6 +1,7 @@
 import svg from './checkbox.html'
 
 const checkboxes = document.getElementsByClassName('checkbox')
+
 for (let checkbox of checkboxes) {
     checkbox.innerHTML = svg + checkbox.innerHTML
     globalThis.state.set(checkbox.id, true)

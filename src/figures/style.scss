@@ -1,5 +1,32 @@
+@import '../colors';
+
+.figures {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding-left: 50px;
+}
+
 .figure {
-    width: 100px;
-    height: 100px;
-    margin: 0.5rem;
+    &-circle {
+        border-radius: 50%;
+    }
+
+    &-dark {
+        &-red { background: $color-dark-red; }
+        &-green { background: $color-dark-green; }
+        &-blue { background: $color-dark-blue; }
+        &-yellow { background: $color-dark-yellow; }
+    }
+
+    &-light {
+        &-red { background: $color-light-red; }
+        &-green { background: $color-light-green; }
+        &-blue { background: $color-light-blue; }
+        &-yellow { background: $color-light-yellow; }
+    }
+
+    &-hidden {
+        display: none;
+    }
 }

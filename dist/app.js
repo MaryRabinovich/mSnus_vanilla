@@ -120,6 +120,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const checkboxes = document.getElementsByClassName('checkbox')
+
 for (let checkbox of checkboxes) {
     checkbox.innerHTML = _checkbox_html__WEBPACK_IMPORTED_MODULE_0__["default"] + checkbox.innerHTML
     globalThis.state.set(checkbox.id, true)
@@ -142,6 +143,8 @@ const numCols = document.getElementById('num-cols')
 
 const min = numCols.getAttribute('min')
 const max = numCols.getAttribute('max')
+
+globalThis.state.set(numCols.id, numCols.value)
 
 numCols.addEventListener('change', () => {
     if (numCols.value < min) numCols.value = min
@@ -188,13 +191,143 @@ for (let option of darknessGroup) {
 
 /***/ }),
 
+/***/ "./src/figures/factory.js":
+/*!********************************!*\
+  !*** ./src/figures/factory.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+const root = document.getElementById('figures')
+
+const hidden = 'figure-hidden'
+
+const width = window.innerWidth - 100
+
+let sizeTotal
+let margin
+let size
+
+function create(params) {
+    const figure = document.createElement('div')
+    root.appendChild(figure)
+    
+    figure.classList.add('figure')
+    figure.classList.add(`figure-${params.form}`)
+    
+    const darkness = ['all']
+    if (params.dark) darkness.unshift('dark')
+    else darkness.unshift('light')
+    figure.classList.add(
+        `figure-${darkness[0]}-${params.color}`
+    )
+
+    let numCols
+    resize()
+
+    function update() {
+        resize()
+        if (isHidden()) return figure.classList.add(hidden)
+        figure.classList.remove(hidden)
+    }
+
+    function isHidden() {
+        if (!globalThis.state.get(params.form)) return true
+        if (!globalThis.state.get(params.color)) return true
+        if (!darkness.includes(
+            globalThis.state.get('darkness')
+        )) return true
+        return false
+    }
+
+    function resize() {
+        if (numCols === globalThis.state.get('num-cols')) return
+
+        numCols = globalThis.state.get('num-cols')
+        if (figure === root.firstChild) setDimensions()
+        figure.style.margin = margin + 'px'
+        figure.style.width = size + 'px'
+        figure.style.height = size + 'px'
+    }
+
+    function setDimensions() {
+        sizeTotal = Math.floor(width / numCols)
+        margin = Math.floor(sizeTotal / 20)
+        size = sizeTotal - 2 * margin
+    }
+
+    return { update }
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+    create
+});
+
+/***/ }),
+
 /***/ "./src/figures/index.js":
 /*!******************************!*\
   !*** ./src/figures/index.js ***!
   \******************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _factory__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./factory */ "./src/figures/factory.js");
+/* harmony import */ var _validator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./validator */ "./src/figures/validator.js");
 __webpack_require__(/*! ./style.scss */ "./src/figures/style.scss")
+
+;
+
+
+fetch('/data/test.json')
+    .then(result => result.json())
+    .then(result => render(result))
+
+function render(data) {
+    data.forEach(item => {
+        if (!_validator__WEBPACK_IMPORTED_MODULE_1__["default"].validate(item)) return
+        globalThis.state.notifier.register(
+
+            _factory__WEBPACK_IMPORTED_MODULE_0__["default"].create(item)
+            )
+    })
+}
+
+/***/ }),
+
+/***/ "./src/figures/validator.js":
+/*!**********************************!*\
+  !*** ./src/figures/validator.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+const rules = {
+    form: ['circle', 'square'],
+    color: ['red', 'green', 'blue', 'yellow'],
+    dark: [true, false]
+}
+
+function validate(item) {
+    for (let rule in rules) {
+        if (!item.hasOwnProperty(rule)) return false
+        if (!rules[rule].includes(item[rule])) return false
+    }
+    return true
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+    validate
+});
 
 /***/ }),
 
@@ -227,10 +360,10 @@ main.addEventListener('click', () => {
 
 /***/ }),
 
-/***/ "./src/state.js":
-/*!**********************!*\
-  !*** ./src/state.js ***!
-  \**********************/
+/***/ "./src/state/notifier.js":
+/*!*******************************!*\
+  !*** ./src/state/notifier.js ***!
+  \*******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -238,21 +371,50 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-const state = {}
+const observers = []
+
+function register(observer) {
+    observers.push(observer)
+}
 
 function notify() {
-    console.log(state)
+    for (let observer of observers) {
+        observer.update()
+    }
 }
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+    register,
+    notify
+});
+
+/***/ }),
+
+/***/ "./src/state/storage.js":
+/*!******************************!*\
+  !*** ./src/state/storage.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _notifier__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./notifier */ "./src/state/notifier.js");
+
+
+const state = {}
 
 function set(key, value) {
     state[key] = value
-    notify()
+    _notifier__WEBPACK_IMPORTED_MODULE_0__["default"].notify()
 }
 
 function toggle(key) {
     if (!typeof (state[key]) === 'boolean') return
     state[key] = !state[key]
-    notify()
+    _notifier__WEBPACK_IMPORTED_MODULE_0__["default"].notify()
 }
 
 function get(key) {
@@ -264,6 +426,8 @@ function all() {
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+    notifier: _notifier__WEBPACK_IMPORTED_MODULE_0__["default"],
+    
     set,
     toggle,
     get,
@@ -336,10 +500,10 @@ var __webpack_exports__ = {};
   !*** ./src/app.js ***!
   \********************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./state */ "./src/state.js");
+/* harmony import */ var _state_storage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./state/storage */ "./src/state/storage.js");
 
 
-globalThis.state = _state__WEBPACK_IMPORTED_MODULE_0__["default"]
+globalThis.state = _state_storage__WEBPACK_IMPORTED_MODULE_0__["default"]
 
 __webpack_require__(/*! ./layout/builder */ "./src/layout/builder.js")
 __webpack_require__(/*! ./controllers/builder */ "./src/controllers/builder.js")
