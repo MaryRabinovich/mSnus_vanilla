@@ -2,7 +2,14 @@ const root = document.getElementById('figures')
 
 const hidden = 'figure-hidden'
 
-const width = window.innerWidth - 100
+const innerWidth = window.innerWidth
+
+let rootPaddingLeft = 50
+if (innerWidth < window.innerHeight) rootPaddingLeft = 20
+
+root.style.paddingLeft = rootPaddingLeft + 'px'
+
+const width = window.innerWidth - 2 * rootPaddingLeft
 
 let sizeTotal
 let margin
