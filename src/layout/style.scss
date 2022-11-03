@@ -6,6 +6,16 @@
     box-sizing: border-box;
 }
 
+html {
+    font-size: 2vh;
+}
+
+@media (max-aspect-ratio: 1 / 1) {
+    html {
+        font-size: 1vh;
+    }
+}
+
 body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 2rem;
@@ -25,8 +35,9 @@ menu {
     padding: 1rem 2rem 1rem 1rem;
     position: absolute;
     top: 5rem;
-    bottom: 0;
     left: 0;
+    height: 90%;
+    min-height: 100vh;
     z-index: 1;
     background: $color-light;
 }
